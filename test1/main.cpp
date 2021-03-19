@@ -1,46 +1,28 @@
 #include <iostream>
 #include <list>
 #include "list.hpp"
+#include "Queue.hpp"
+#include "Stack.hpp"
+
+bool iss(int i1, int i2)
+{
+	return (i1 < i2);
+}
 
 int main()
 {
-	std::list<int> *a = new std::list<int>();
-	a->push_front(8);
-	a->push_front(7);
-	a->push_front(6);
-	a->push_front(5);
-	a->push_front(4);
-	std::list<int>::iterator it = a->begin();
-	int i = 0;
-	while(i < 20)
+	ft::List<int> *q = new ft::List<int>();
+	q->push_front(9);
+	q->push_back(99);
+	ft::List<int>::iterator it = q->begin();
+	q->pop_front();
+	q->pop_front();
+	while(it != q->end())
 	{
-		std::cout << *it << " = " << i << std::endl;
+		std::cout << *it << std::endl;
 		it++;
-		i++;
 	}
 
-	ft::List<int> *b = new ft::List<int>();
-
-	b->push_front(44);
-	b->push_front(55);
-	b->push_front(88);
-	b->push_front(222);
-	b->pop_front();
-	b->pop_front();
-	b->pop_front();
-	b->pop_front();
-	b->pop_front();
-	b->pop_front();
-
-	b->pop_front();
-	ft::List<int>::iterator ic = b->begin();
-	std::cout << b->size() << std::endl;
-
-	while(ic != b->end())
-	{
-		std::cout << *ic << std::endl;
-		++ic;
-	}
 	return 0;
 }
 
