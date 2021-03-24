@@ -159,70 +159,70 @@ namespace ft {
 
 
 	//
-	template<class T, class N>
-	class ConstListIterator {
-	protected:
-		N *p;
-	public:
-		ConstListIterator() : p(0) {
-			return;
-		}
-
-		ConstListIterator(N *p) : p(p) {
-			return;
-		}
-
-		ConstListIterator(const ConstListIterator<T, N> &it) {
-			p = it.p;
-			return;
-		}
-
-		T getData(void) const {
-			return this->p->data;
-		}
-
-		bool operator!=(const ConstListIterator<T, N> &it) {
-			if (this->p != it.p)
-				return (true);
-			return false;
-		}
-
-		const T &operator*() const {
-			return this->p->data;
-		}
-
-		ConstListIterator<T, N> &operator++() {
-			p = p->next;
-			return *this;
-		}
-
-		ConstListIterator<T, N> operator++(int) {
-			ConstListIterator<T, N> tmp = *this;
-			p = p->next;
-			return tmp;
-		}
-
-		ConstListIterator<T, N> &operator--() {
-			p = p->prev;
-			return *this;
-		}
-
-		ConstListIterator<T, N> operator--(int) {
-			ConstListIterator<T, N> tmp = *this;
-			p = p->prev;
-			return tmp;
-		}
-
-		void setp(N *p) {
-			this->p = p;
-			return;
-		}
-
-		N *getp() {
-			return p;
-		}
-
-	};
+//	template<class T, class N>
+//	class ConstListIterator {
+//	protected:
+//		N *p;
+//	public:
+//		ConstListIterator() : p(0) {
+//			return;
+//		}
+//
+//		ConstListIterator(N *p) : p(p) {
+//			return;
+//		}
+//
+//		ConstListIterator(const ConstListIterator<T, N> &it) {
+//			p = it.p;
+//			return;
+//		}
+//
+//		T getData(void) const {
+//			return this->p->data;
+//		}
+//
+//		bool operator!=(const ConstListIterator<T, N> &it) {
+//			if (this->p != it.p)
+//				return (true);
+//			return false;
+//		}
+//
+//		const T &operator*() const {
+//			return this->p->data;
+//		}
+//
+//		ConstListIterator<T, N> &operator++() {
+//			p = p->next;
+//			return *this;
+//		}
+//
+//		ConstListIterator<T, N> operator++(int) {
+//			ConstListIterator<T, N> tmp = *this;
+//			p = p->next;
+//			return tmp;
+//		}
+//
+//		ConstListIterator<T, N> &operator--() {
+//			p = p->prev;
+//			return *this;
+//		}
+//
+//		ConstListIterator<T, N> operator--(int) {
+//			ConstListIterator<T, N> tmp = *this;
+//			p = p->prev;
+//			return tmp;
+//		}
+//
+//		void setp(N *p) {
+//			this->p = p;
+//			return;
+//		}
+//
+//		N *getp() {
+//			return p;
+//		}
+//
+//	};
 
 	//
 	
@@ -236,7 +236,7 @@ namespace ft {
 	public:
 		typedef ListIterator<T, Node<T> > iterator;
 		typedef RevListIterator<T, Node<T> > reverse_iterator;
-		typedef ConstListIterator<T, Node<T> > const_iterator;
+//		typedef ConstListIterator<T, Node<T> > const_iterator;
 
 		void print_l() {
 			iterator it = begin();
