@@ -411,14 +411,24 @@ namespace ft {
 			return pos;
 		}
 
-		void insert(iterator pos, iterator deb, iterator fin)
+//		void insert(iterator pos, iterator deb, iterator fin)
+//		{
+//			while (deb != fin)
+//			{
+//				std::cout << "loop" << std::endl;
+//				insert(pos, *deb);
+//				deb++;
+//			}
+//		}
+
+		void clear()
 		{
-			while (deb != fin)
-			{
-				std::cout << "loop" << std::endl;
-				insert(pos, *deb);
-				deb++;
-			}
+			if (_capacity > 0)
+				alloc.deallocate(data, _capacity);
+			_size = 0;
+			_capacity = 0;
+			data = 0;
+			
 		}
 
 	};

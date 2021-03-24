@@ -50,16 +50,9 @@ int main() {
 
 	ft::Vector<int>::iterator it = v->begin();
 	it++;
-	v->insert(it, -42);
 	std::cout << *it << std::endl;
 	v->print();
-//	ft::Vector<int>::iterator it = v->begin();
-//	std::cout << "ITER" << std::endl;
-//	while(it != v->end())
-//	{
-//		std::cout << *it << std::endl;
-//		it++;
-//	}
+
 	return 0;
 }
 
