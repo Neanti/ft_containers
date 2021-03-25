@@ -18,7 +18,7 @@ namespace ft {
 				NodeMap *left;
 				NodeMap *right;
 				color col;
-				explicit NodeMap(T const &val = T(), color col = RED) : value(val), parent(0), left(0), right(0), col(color)
+				explicit NodeMap(T const &val = T(), color col = RED) : value(val), parent(0), left(0), right(0), col(col)
 				{
 					return;
 				}
@@ -76,7 +76,7 @@ namespace ft {
 
 			};
 
-	template < class Key, class T, class Compare = less<Key>, class Alloc = allocator<pair<const Key,T> > >
+	template < class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<std::pair<const Key,T> > >
 	class Map{
 	private:
 		typedef std::pair<const Key, T> value_type;

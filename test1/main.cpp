@@ -4,6 +4,8 @@
 #include "Queue.hpp"
 #include "Stack.hpp"
 #include "Vector.hpp"
+#include "Map.hpp"
+
 
 bool iss(int i1, int i2)
 {
