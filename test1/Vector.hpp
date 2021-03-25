@@ -382,45 +382,6 @@ namespace ft {
 			return (data[_size - 1]);
 		}
 
-		iterator insert(iterator pos, const T &val)
-		{
-			check_size(1);
-			iterator it = begin();
-			int i = 0;
-			while(it != pos)
-			{
-				std::cout << "loop BO" << std::endl;
-
-				i++;
-				it++;
-			}
-			T tmp = data[i];
-			T next;
-			data[i] = val;
-			_size++;
-			i++;
-			while(i < _size)
-			{
-				std::cout << "loop PO" << std::endl;
-
-				next = data[i];
-				data[i] = tmp;
-				tmp = next;
-				i++;
-			}
-			return pos;
-		}
-
-//		void insert(iterator pos, iterator deb, iterator fin)
-//		{
-//			while (deb != fin)
-//			{
-//				std::cout << "loop" << std::endl;
-//				insert(pos, *deb);
-//				deb++;
-//			}
-//		}
-
 		void clear()
 		{
 			if (_capacity > 0)
@@ -428,7 +389,104 @@ namespace ft {
 			_size = 0;
 			_capacity = 0;
 			data = 0;
-			
+
+		}
+
+		void swap(Vector<T> &x)
+		{
+			size_t tmp1;
+			size_t tmp2;
+			T* tmp_data;
+
+			tmp1 = _capacity;
+			tmp2 = _size;
+			tmp_data = data;
+			data = x.data;
+			_capacity = x._capacity;
+			_size = x._size;
+			x._capacity = tmp1;
+			x._size = tmp2;
+			x.data = tmp_data;
+			return;
+		}
+
+		iterator insert(iterator pos, const T &val)
+		{
+			iterator it = begin();
+			int i = 0;
+			while(it != pos)
+			{
+				i++;
+				it++;
+			}
+			check_size(1);
+			T tmp = data[i];
+			T next;
+			data[i] = val;
+			it = iterator(data + i);
+			_size++;
+			i++;
+			while(i < _size)
+			{
+				next = data[i];
+				data[i] = tmp;
+				tmp = next;
+				i++;
+			}
+			return it;
+		}
+
+		void insert(iterator pos, size_t n, const T &val)
+		{
+			iterator it = pos;
+			while(n > 0)
+			{
+				it = insert(it, val);
+				n--;
+			}
+			return ;
+		}
+
+		void insert(iterator pos, iterator deb, iterator fin)
+		{
+			iterator it = pos;
+
+			while(deb != fin)
+			{
+				it = insert(it, *deb);
+				deb++;
+			}
+		}
+
+		iterator erase(iterator pos)
+		{
+
+			iterator it = begin();
+			int i = 0;
+
+			while(it != pos)
+			{
+				it++;
+				i++;
+			}
+
+			while(i != _size - 1)
+			{
+				data[i] = data[i + 1];
+				i++;
+			}
+			_size--;
+			return it;
+		}
+
+		iterator erase(iterator deb, iterator fin)
+		{
+			while(deb != fin)
+			{
+				deb = erase(deb);
+				fin--;
+			}
+			return deb;
 		}
 
 	};

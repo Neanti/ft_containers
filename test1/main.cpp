@@ -30,13 +30,11 @@ int main() {
 //		tt++;
 //	}
 
-	ft::Vector<int> *g = new ft::Vector<int>();
-	g->push_back(-1);
-	g->push_back(-2);
-	g->push_back(-3);
-	g->push_back(-4);
-	g->push_back(-5);
-	g->push_back(-6);
+//	ft::Vector<int> *g = new ft::Vector<int>();
+//	g->push_back(-1);
+//	g->push_back(-2);
+//	g->push_back(-3);
+//	g->push_back(-4);
 
 
 	ft::Vector<int> *v = new ft::Vector<int>();
@@ -47,12 +45,14 @@ int main() {
 	v->push_back(5);
 	v->push_back(6);
 
-
 	ft::Vector<int>::iterator it = v->begin();
-	it++;
+	ft::Vector<int>::iterator ie = v->end();
+	ie--;
+	ie--;
+
+	it = v->erase(v->begin(), ie);
 	std::cout << *it << std::endl;
 	v->print();
-
 	return 0;
 }
 
