@@ -52,7 +52,6 @@ namespace ft {
 				{
 					return value == other.value;
 				}
-
 				bool operator!=(const NodeMap &other)
 				{
 					return value != other.value;
