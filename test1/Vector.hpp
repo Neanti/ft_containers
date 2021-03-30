@@ -389,7 +389,6 @@ namespace ft {
 			_size = 0;
 			_capacity = 0;
 			data = 0;
-
 		}
 
 		void swap(Vector<T> &x)

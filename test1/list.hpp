@@ -76,6 +76,10 @@ namespace ft {
 			return p;
 		}
 
+		N *getp() const {
+			return p;
+		}
+
 	};
 
 	template<class T, class N>
@@ -149,6 +153,10 @@ namespace ft {
 			return p;
 		}
 
+		N *getp() const {
+			return p;
+		}
+
 	};
 
 	template<class T, class N>
@@ -158,75 +166,171 @@ namespace ft {
 	}
 
 
-	//
-//	template<class T, class N>
-//	class ConstListIterator {
-//	protected:
-//		N *p;
-//	public:
-//		ConstListIterator() : p(0) {
-//			return;
-//		}
-//
-//		ConstListIterator(N *p) : p(p) {
-//			return;
-//		}
-//
-//		ConstListIterator(const ConstListIterator<T, N> &it) {
-//			p = it.p;
-//			return;
-//		}
-//
-//		T getData(void) const {
-//			return this->p->data;
-//		}
-//
-//		bool operator!=(const ConstListIterator<T, N> &it) {
-//			if (this->p != it.p)
-//				return (true);
-//			return false;
-//		}
-//
-//		const T &operator*() const {
-//			return this->p->data;
-//		}
-//
-//		ConstListIterator<T, N> &operator++() {
-//			p = p->next;
-//			return *this;
-//		}
-//
-//		ConstListIterator<T, N> operator++(int) {
-//			ConstListIterator<T, N> tmp = *this;
-//			p = p->next;
-//			return tmp;
-//		}
-//
-//		ConstListIterator<T, N> &operator--() {
-//			p = p->prev;
-//			return *this;
-//		}
-//
-//		ConstListIterator<T, N> operator--(int) {
-//			ConstListIterator<T, N> tmp = *this;
-//			p = p->prev;
-//			return tmp;
-//		}
-//
-//		void setp(N *p) {
-//			this->p = p;
-//			return;
-//		}
-//
-//		N *getp() {
-//			return p;
-//		}
-//
-//	};
 
-	//
-	
-	
+	template<class T, class N>
+	class ConstListIterator {
+	protected:
+		N *p;
+	public:
+		ConstListIterator() : p(0) {
+			return;
+		}
+
+		ConstListIterator(N *p) {
+			this->p = p;
+			return;
+		}
+
+		ConstListIterator(const ConstListIterator<T, N> &it) {
+			p = it.p;
+			return;
+		}
+
+		ConstListIterator(const ListIterator<T, N> &it)
+		{
+			p = it.getp();
+		}
+
+		T getData(void) const {
+			return this->p->data;
+		}
+
+		bool operator!=(const ConstListIterator<T, N> &it) {
+			if (this->p != it.p)
+				return (true);
+			return false;
+		}
+
+		const T &operator*() const {
+			return this->p->data;
+		}
+
+		ConstListIterator<T, N> &operator++() {
+			p = p->next;
+			return *this;
+		}
+
+		ConstListIterator<T, N> operator++(int) {
+			ConstListIterator<T, N> tmp = *this;
+			p = p->next;
+			return tmp;
+		}
+
+		ConstListIterator<T, N> &operator--() {
+			p = p->prev;
+			return *this;
+		}
+
+		ConstListIterator<T, N> operator--(int) {
+			ConstListIterator<T, N> tmp = *this;
+			p = p->prev;
+			return tmp;
+		}
+
+		void setp(N *p) {
+			this->p = p;
+			return;
+		}
+
+		N *getp() {
+			return p;
+		}
+
+		N *getp() const {
+			return p;
+		}
+
+	};
+
+	template<class T, class N>
+	std::ostream &operator<<(std::ostream &output, const ConstListIterator<T, N> in) {
+		std::cout << in.getData() << std::endl;
+		return output;
+	}
+
+	template<class T, class N>
+	class ConstRevListIterator {
+	protected:
+		N *p;
+	public:
+		ConstRevListIterator() : p(0) {
+			return;
+		}
+
+		ConstRevListIterator(N *p) : p(p) {
+			return;
+		}
+
+
+		ConstRevListIterator(const ConstRevListIterator<T, N> &it) {
+			p = it.p;
+			return;
+		}
+
+		ConstRevListIterator(const RevListIterator<T, N> &it)
+		{
+			p = it.getp();
+		}
+
+		T getData(void) const {
+			return this->p->data;
+		}
+
+		bool operator!=(const ConstRevListIterator<T, N> &it) {
+			if (this->p != it.p)
+				return (true);
+			return false;
+		}
+
+		const T &operator*() const {
+			return this->p->data;
+		}
+
+		ConstRevListIterator<T, N> &operator--() {
+			p = p->next;
+			return *this;
+		}
+
+		ConstRevListIterator<T, N> operator--(int) {
+			ConstRevListIterator<T, N> tmp = *this;
+			p = p->next;
+			return tmp;
+		}
+
+		ConstRevListIterator<T, N> &operator++() {
+			p = p->prev;
+			return *this;
+		}
+
+		ConstRevListIterator<T, N> operator++(int) {
+			ConstRevListIterator<T, N> tmp = *this;
+			p = p->prev;
+			return tmp;
+		}
+
+		void setp(N *p) {
+			this->p = p;
+			return;
+		}
+
+		N *getp() {
+			return p;
+		}
+
+		N *getp() const {
+			return p;
+		}
+
+	};
+
+	template<class T, class N>
+	std::ostream &operator<<(std::ostream &output, const ConstRevListIterator<T, N> in) {
+		std::cout << in.getData() << std::endl;
+		return output;
+	}
+
+
+
 	template<class T, class Alloc = std::allocator <T> >
 	class List {
 	private:
@@ -234,9 +338,10 @@ namespace ft {
 		Node<T> *_end;
 		size_t _size;
 	public:
-		typedef ListIterator<T, Node<T> > iterator;
-		typedef RevListIterator<T, Node<T> > reverse_iterator;
-//		typedef ConstListIterator<T, Node<T> > const_iterator;
+		typedef ft::ListIterator<T, Node<T> > iterator;
+		typedef ft::RevListIterator<T, Node<T> > reverse_iterator;
+		typedef ft::ConstListIterator<T, Node<T> > const_iterator;
+		typedef ft::ConstRevListIterator<T, Node<T> > const_reverse_iterator;
 
 		void print_l() {
 			iterator it = begin();
@@ -268,7 +373,7 @@ namespace ft {
 			return;
 		}
 
-		List(size_t n, const T &val, const Alloc &alloc = Alloc()) {
+		explicit List(size_t n, const T &val, const Alloc &alloc = Alloc()) {
 			T v = val;
 			_size = 0;
 			_end = new Node<T>;
@@ -329,19 +434,12 @@ namespace ft {
 		}
 
 		iterator begin() {
-//			iterator *it = new ListIterator<T, Node<T> >;
-//			it->setp(_begin);
-//			return *it;
 			return (iterator(_begin));
 		}
 
-//		const_iterator begin() const {
-////			const_iterator *it = new ConstListIterator<T const, Node<T> const >;
-////			it->setp(_begin);
-////			return *it;
-//			return (const_iterator(_begin));
-//
-//		}
+		const_iterator begin() const {
+			return (const_iterator(_begin));
+		}
 
 		iterator end() {
 			iterator *it = new ListIterator<T, Node<T> >;
@@ -349,8 +447,20 @@ namespace ft {
 			return *it;
 		}
 
-		reverse_iterator rbegin() const {
+		const_iterator end() const {
+			iterator *it = new ConstListIterator<T, Node<T> >;
+			it->setp(_end);
+			return *it;
+		}
+
+		reverse_iterator rbegin() {
 			reverse_iterator *it = new RevListIterator<T, Node<T> >;
+			it->setp(_end->prev);
+			return *it;
+		}
+
+		const_reverse_iterator rbegin() const {
+			const_reverse_iterator *it = new ConstRevListIterator<T, Node<T> >;
 			it->setp(_end->prev);
 			return *it;
 		}
@@ -785,6 +895,76 @@ namespace ft {
 			return (std::numeric_limits<size_t>::max() / sizeof(T));
 		}
 	};
+		template <class T, class Alloc>
+		bool operator== (const List<T,Alloc>& lhs, const List<T,Alloc>& rhs)
+		{
+			typename ft::List<T>::const_iterator it_lhs = lhs.begin();
+			typename ft::List<T>::const_iterator it_rhs = rhs.begin();
+
+			if (lhs.size() != rhs.size())
+				return false;
+			while(it_lhs != lhs.end() && it_rhs != rhs.end() && *it_lhs == *it_rhs)
+			{
+				it_lhs++;
+				it_rhs++;
+			}
+			return (it_lhs == lhs.end() && it_rhs == rhs.end());
+		}
+
+		template <class T, class Alloc>
+		bool operator!= (const List<T,Alloc>& lhs, const List<T,Alloc>& rhs)
+		{
+			return (!(lhs == rhs));
+		}
+
+		template <class T, class Alloc>
+		bool operator<  (const List<T,Alloc>& lhs, const List<T,Alloc>& rhs)
+		{
+			typename ft::List<T>::const_iterator	it_lhs = lhs.begin();
+			typename ft::List<T>::const_iterator	it_rhs = rhs.begin();
+
+			if (lhs == rhs)
+				return (false);
+			while (it_lhs != lhs.end() && it_rhs != rhs.end() &&
+				   *it_lhs == *it_rhs)
+			{
+				it_lhs++;
+				it_rhs++;
+			}
+			if (it_rhs != rhs.end())
+				return (true);
+			return (false);
+		}
+
+		template <class T, class Alloc>
+		bool operator<= (const List<T,Alloc>& lhs, const List<T,Alloc>& rhs)
+		{
+			if (lhs == rhs)
+				return (true);
+			return (lhs < rhs);
+		}
+
+		template <class T, class Alloc>
+		bool operator>  (const List<T,Alloc>& lhs, const List<T,Alloc>& rhs)
+		{
+			if (lhs == rhs)
+				return (false);
+			return (!(lhs < rhs));
+		}
+
+		template <class T, class Alloc>
+		bool operator>= (const List<T,Alloc>& lhs, const List<T,Alloc>& rhs)
+		{
+			if (lhs == rhs)
+				return (true);
+			return (!(lhs < rhs));
+		}
+
+		template <class T, class Alloc>
+		void swap (List<T,Alloc>& x, List<T,Alloc>& y)
+		{
+			x.swap(y);
+		}
 }
 
 #endif
