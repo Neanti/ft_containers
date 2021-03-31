@@ -83,12 +83,15 @@ namespace ft {
 		Compare comp;
 		size_t lenght;
 	public:
-		explicit Map(const Compare comp = Compare(), const Alloc &alloc = Alloc())
+
+		Map(const Compare comp = Compare(), const Alloc &alloc = Alloc())
 		{
 			lenght = 0;
 			this->comp = comp;
 			root = 0;
 		}
+
+
 
 	};
 

@@ -69,6 +69,10 @@ namespace ft {
 			return p;
 		}
 
+		T *getp() const {
+			return p;
+		}
+
 	};
 
 	template<class T>
@@ -77,7 +81,82 @@ namespace ft {
 		return output;
 	}
 
+	template<class T>
+	class ConstVecIterator {
+	protected:
+		T *p;
+	public:
+		ConstVecIterator() : p(0) {
+			return;
+		}
 
+		ConstVecIterator(T *p) : p(p) {
+			return;
+		}
+
+		ConstVecIterator(const ConstVecIterator<T> &it) {
+			p = it.p;
+			return;
+		}
+
+		ConstVecIterator(const VecIterator<T> &it) {
+			p = it.getp();
+			return;
+		}
+
+		T getData(void) const {
+			return *p;
+		}
+
+		bool operator!=(const ConstVecIterator<T> &it) {
+			if (this->p != it.p)
+				return (true);
+			return false;
+		}
+
+		const T &operator*() const {
+			return (*p);
+		}
+
+		ConstVecIterator<T> &operator++() {
+			p += 1;
+			return *this;
+		}
+
+		ConstVecIterator<T> operator++(int) {
+			ConstVecIterator<T> tmp = *this;
+			p += 1;
+			return tmp;
+		}
+
+		ConstVecIterator<T> &operator--() {
+			p -= 1;
+			return *this;
+		}
+
+		ConstVecIterator<T> operator--(int) {
+			ConstVecIterator<T> tmp = *this;
+			p -= 1;
+			return tmp;
+		}
+
+		void setp(T *p) {
+			this->p = p;
+			return;
+		}
+
+		T *getp() {
+			return p;
+		}
+
+	};
+
+	template<class T>
+	std::ostream &operator<<(std::ostream &output, const ConstVecIterator<T> in) {
+		std::cout << in.getData() << std::endl;
+		return output;
+	}
+	
 	template<class T>
 	class RevVecIterator {
 	protected:
@@ -142,6 +221,10 @@ namespace ft {
 			return p;
 		}
 
+		T *getp() const {
+			return p;
+		}
+
 	};
 
 	template<class T>
@@ -150,6 +233,84 @@ namespace ft {
 		return output;
 	}
 
+	template<class T>
+	class ConstRevVecIterator {
+	protected:
+		T *p;
+	public:
+		ConstRevVecIterator() : p(0) {
+			return;
+		}
+
+		ConstRevVecIterator(T *p) : p(p) {
+			return;
+		}
+
+
+		ConstRevVecIterator(const ConstRevVecIterator<T> &it) {
+			p = it.p;
+			return;
+		}
+
+		ConstRevVecIterator(const RevVecIterator<T> &it) {
+			p = it.getp();
+			return;
+		}
+
+
+		T getData(void) const {
+			return *p;
+		}
+
+		bool operator!=(const ConstRevVecIterator<T> &it) {
+			if (this->p != it.p)
+				return (true);
+			return false;
+		}
+
+		const T &operator*() const {
+			return *p;
+		}
+
+		ConstRevVecIterator<T> &operator--() {
+			p += 1;
+			return *this;
+		}
+
+		ConstRevVecIterator<T> operator--(int) {
+			ConstRevVecIterator<T> tmp = *this;
+			p += 1;
+			return tmp;
+		}
+
+		ConstRevVecIterator<T> &operator++() {
+			p -= 1;
+			return *this;
+		}
+
+		ConstRevVecIterator<T> operator++(int) {
+			ConstRevVecIterator<T> tmp = *this;
+			p -= 1;
+			return tmp;
+		}
+
+		void setp(T *p) {
+			this->p = p;
+			return;
+		}
+
+		T *getp() {
+			return p;
+		}
+
+	};
+
+	template<class T>
+	std::ostream &operator<<(std::ostream &output, const ConstRevVecIterator<T> in) {
+		std::cout << in.getData() << std::endl;
+		return output;
+	}
+	
 	template<class T, class Alloc = std::allocator <T> >
 	class Vector {
 	private:
@@ -187,6 +348,8 @@ namespace ft {
 
 		typedef VecIterator<T> iterator;
 		typedef RevVecIterator<T> reverse_iterator;
+		typedef ConstRevVecIterator<T> const_reverse_iterator;
+		typedef ConstVecIterator<T> const_iterator;
 
 		void print() {
 			int i = 0;
@@ -279,16 +442,32 @@ namespace ft {
 			return (iterator(data));
 		}
 
+		const_iterator begin() const{
+			return (const_iterator(data));
+		}
+
 		iterator end() {
 			return (iterator(&(data[_size])));
+		}
+
+		const_iterator end() const {
+			return (const_iterator(&(data[_size])));
 		}
 
 		reverse_iterator rbegin() {
 			return (reverse_iterator(&(data[_size - 1])));
 		}
 
+		const_reverse_iterator rbegin() const{
+			return (const_reverse_iterator(&(data[_size - 1])));
+		}
+
 		reverse_iterator rend() {
 			return (reverse_iterator(data - 1));
+		}
+
+		const_reverse_iterator rend() const {
+			return (const_reverse_iterator(data - 1));
 		}
 
 		bool empty() const {
@@ -487,8 +666,79 @@ namespace ft {
 			}
 			return deb;
 		}
-
 	};
+
+	template<class T, class Alloc>
+	bool operator==(const Vector<T, Alloc> &lhs, const Vector<T, Alloc>& rhs)
+	{
+		typename ft::Vector<T>::const_iterator it_lhs = lhs.begin();
+		typename ft::Vector<T>::const_iterator it_rhs = rhs.begin();
+
+		if (rhs.size() != lhs.size())
+			return (false);
+		while(it_lhs != lhs.end() && it_rhs != rhs.end() && *it_lhs == *it_rhs)
+		{
+			it_lhs++;
+			it_rhs++;
+		}
+		return (it_lhs == lhs.end() && it_rhs == rhs.end());
+	}
+
+	template<class T, class Alloc>
+	bool operator!=(const Vector<T, Alloc>& lhs, const Vector<T, Alloc>& rhs)
+	{
+		return (!(lhs == rhs));
+	}
+
+	template<class T, class Alloc>
+	bool operator<(const Vector<T, Alloc>& lhs, const Vector<T, Alloc>& rhs)
+	{
+		typename ft::Vector<T>::const_iterator it_lhs = lhs.begin();
+		typename ft::Vector<T>::const_iterator it_rhs = rhs.begin();
+
+		if (lhs == rhs)
+			return (false);
+		while(it_lhs != lhs.end() && it_rhs != rhs.end() && *it_lhs == *it_rhs)
+		{
+			it_lhs++;
+			it_rhs++;
+		}
+
+		if (it_rhs != rhs.end())
+			return true;
+		return false;
+	}
+
+	template<class T, class Alloc>
+	bool operator<=(const Vector<T, Alloc>& lhs, const Vector<T, Alloc>& rhs)
+	{
+		if (lhs == rhs)
+			return true;
+		return (lhs < rhs);
+	}
+
+	template<class T, class Alloc>
+	bool operator>(const Vector<T, Alloc>& lhs, const Vector<T, Alloc>& rhs)
+	{
+		if (lhs == rhs)
+			return false;
+		return (!(lhs < rhs));
+	}
+
+	template<class T, class Alloc>
+	bool operator>=(const Vector<T, Alloc>& lhs, const Vector<T, Alloc>& rhs)
+	{
+		if (lhs == rhs)
+			return true;
+		return (!(lhs < rhs));
+	}
+
+	template<class T, class Alloc>
+	void swap(Vector<T, Alloc>& x, Vector<T, Alloc>& y)
+	{
+		x.swap(y);
+	}
+
 }
 
 #endif
